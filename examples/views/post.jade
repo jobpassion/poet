@@ -12,3 +12,36 @@ block content
       - each tag in post.tags
         a(href=tagUrl(tag))
           span.label.label-info #{tag}
+  p
+  if comments
+      div.comments
+        legend 评论
+        - each comment in comments
+            legend  
+                h3 by #{comment.name} #{comment.website}
+                p #{comment.comment}
+  p
+  form.form-horizontal(method="post" role="form" action="#{post.url}" enctype="application/x-www-form-urlencoded")
+    fieldset
+        legend 发表评论
+        div.control-group
+            hidden#postId(value=post.slug)
+            label.control-label(for="Name") Name
+            div.controls
+                input.input-xlarge#Name(name="name")
+                p.help-block  
+            label.control-label(for="email") Email
+            div.controls
+                input.input-xlarge#email(name="email")
+                p.help-block  
+            label.control-label(for="website") 网址
+            div.controls
+                input.input-xlarge#website(name="website")
+                p.help-block  
+            label.control-label(for="comment") 评论内容
+            div.controls
+                textarea.input-xlarge#comment(name="comment")
+                p.help-block  
+            div.form-actions(style="background-color:inherit")
+                button.btn.btn-primary(type="submit") Submit
+
